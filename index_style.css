@@ -116,20 +116,31 @@ body{
 }
 
 .ticket_cont{
-    height: 10rem;
+    height: 13rem;
     width: 16rem;
     background-color: tomato;
 }
 .ticket_color{
     height: 1rem;
-    background-color: violet;
+    /* background-color: violet; */
 }
 .ticket_id{
     height: 2rem;
     background-color: royalblue;
 }
 .ticket_task{
-    height: calc(100%-1rem-2rem);
-    background-color: tomato;
+    height: calc(100% - 1rem - 2rem - 2rem);
+    /* background-color: tomato; */
     padding: 0.4rem;
+    outline: none;
+}
+.ticket_lock{
+    height: 2rem;
+    /* background-color: red; */
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1rem;
+    align-items: center;
+    font-size: 1.5rem;
+    color: thistle;
 }
