@@ -102,3 +102,34 @@ body{
     height: 3rem;   
     width: 60%;
 }
+
+.border{
+    border: 5px solid white;
+}
+
+.main_cont{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.ticket_cont{
+    height: 10rem;
+    width: 16rem;
+    background-color: tomato;
+}
+.ticket_color{
+    height: 1rem;
+    background-color: violet;
+}
+.ticket_id{
+    height: 2rem;
+    background-color: royalblue;
+}
+.ticket_task{
+    height: calc(100%-1rem-2rem);
+    background-color: tomato;
+    padding: 0.4rem;
+}
