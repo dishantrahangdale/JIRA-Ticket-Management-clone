@@ -1,15 +1,17 @@
 *{
     box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
 }
 body{
     margin: 0;
     padding: 0;
+    background-color: #e8f1cd;
 }
 .toolbox_cont{
     display: flex;
     height: 5rem;
     /* width: 100%; */
-    background-color: lightblue;
+    background-color: #0F0E0E;
     /* border: 1px solid black; */
     align-items: center;
 
@@ -17,19 +19,19 @@ body{
 .priority_cont{
     height: 3.5rem;
     width: 16rem;
-    background-color: lightgreen;
+    background-color: #541212;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 .toolbox_cont >*{
-    margin-left: 4rem;
+    margin-left: 2rem;
     border-radius: 2px;
 }
 .action_buttons_cont{
     height: 3.5rem;
-    width: 8rem;
-    background-color: lightpink;
+    width: 6rem;
+    background-color: #541212;
     display: flex;
 }
 .action_buttons_cont >*{
@@ -38,12 +40,12 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    color: blueviolet;
+    color: #D8E9A8;
 }
 .color{
     height: 1.3rem;
     width: 2.5rem; 
-    background-color: lightsalmon;
+    /* background-color: lightsalmon; */
     border-radius: 2px;
 }
 .action_buttons_cont>*:hover{
@@ -52,16 +54,16 @@ body{
 
 
 .cl1{
-    background-color: red;
+    background-color: #1F1D36;
 }
 .cl2{
-    background-color: green;
+    background-color : #3F3351;
 }
 .cl3{
-    background-color: yellow;
+    background-color:#864879;
 }
 .cl4{
-    background-color: blue;
+    background-color: #E9A6A6;
 }
 
 
@@ -69,7 +71,7 @@ body{
 .modal_cont{
     height: 50vh;
     /* margin: 3rem; */
-    background-color: cornflowerblue;
+    background-color: #374045;
     width: 45vw;
     display: flex;
     position: absolute;
@@ -77,13 +79,14 @@ body{
     top: calc( (100vh - 50vh) /2);
     left: calc( (100vw - 45vw) /2);
     display: none;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 .text_area{
     height: 100%;
     width: 75%;
     outline: none;
     border: none;
-    background-color: lightskyblue;
+    background-color: #374045;
     resize: none;
     padding: 2rem;
     font-size: 1.5rem;
@@ -91,7 +94,7 @@ body{
 .priority_colors{
     width: 25%;
     height: 100%;
-    background-color: lightgreen;
+    background-color: #541212;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -118,7 +121,7 @@ body{
 .ticket_cont{
     height: 13rem;
     width: 16rem;
-    background-color: tomato;
+    background-color: #FFFEA9;
 }
 .ticket_color{
     height: 1rem;
@@ -126,7 +129,8 @@ body{
 }
 .ticket_id{
     height: 2rem;
-    background-color: royalblue;
+    font-size: 0.8rem;
+    background-color: #F0ECE3;
 }
 .ticket_task{
     height: calc(100% - 1rem - 2rem - 2rem);
@@ -143,4 +147,46 @@ body{
     align-items: center;
     font-size: 1.5rem;
     color: thistle;
+}
+.footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: white; */
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    font-size: 0.9rem;
+    /* left: 42%; */
+    
+}
+@media screen and (min-width: 425px) and (max-width:768px){
+    .modal_cont{
+        width: 60vw;
+        left: (100vw-60vw)/2;
+
+    }
+}
+
+@media screen and (max-width:426px){
+    .modal_cont{
+        width: 75vw;
+        top: calc((100vh - 40vh) / 2);
+        left: calc((100vw - 75vw) / 2);
+        flex-direction: column;
+        height: 70%;
+    }
+    .text_area{
+        width: 100%;
+    }
+    .pri_col{
+        width: 20%;
+    }
+    .priority_colors{
+        flex-direction: row;
+        width: 100%;
+        height: 25%;
+    }
+
 }
