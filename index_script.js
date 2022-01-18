@@ -14,6 +14,13 @@ let lockclass = "fa-lock";
 let unlockclass = "fa-unlock";
 let ticket_arr = []
 
+if(localStorage.getItem("jira_tickets")){
+    ticket_arr = JSON.parse(localStorage.getItem("jira_tickets"));
+    ticket_arr.forEach((ticketObj)=>{
+        createNewTicket(ticketObj.t_color,ticketObj.t_data,ticketObj.t_id)
+    })
+}
+
 for(let i=0; i<4; i++){
     toolBoxColors[i].addEventListener("click",(e)=>{
         let currentToolBoxColor = toolBoxColors[i].classList[0];
@@ -99,31 +106,44 @@ function createNewTicket(t_color,t_data,t_id){
 
     ticketcont.innerHTML = `
         <div class="ticket_color ${t_color}"></div>
-        <div class="ticket_id">${t_id}</div>
+        <div class="ticket_id">#${id}</div>
         <div class="ticket_task">${t_data}</div>
         <div class="ticket_lock"> <i class="fas fa-lock"></i> </div>
     `;
 
     mainCont.appendChild(ticketcont);
 
-    if(!t_id)  ticket_arr.push({t_color,t_data,t_id:id});
+    if(!t_id) { 
+        ticket_arr.push({t_color,t_data,t_id:id});
+        localStorage.setItem("jira_tickets",JSON.stringify(ticket_arr))
+    }
 
-    handle_Remove(ticketcont);
-    handle_lock(ticketcont);
-    handle_color(ticketcont);
+    handle_Remove(ticketcont,id);
+    handle_lock(ticketcont,id);
+    handle_color(ticketcont,id);
 }
 
-function handle_Remove(ticket){
-     if(delflag){
-         ticket.remove();
-     }
+function handle_Remove(ticket,id){
+    ticket.addEventListener("click",(e)=>{
+        if(!delflag)    return;
+        let idx = getTicketIdx(id);
+        ticket_arr.splice(idx,1);
+        // localStorage.setItem("jira_tickets",JSON.stringify(ticket_arr))
+        localStorage.setItem("jira_tickets",JSON.stringify(ticket_arr));
+        // let strTicketArr = ;
+        ticket.remove(); 
+    })
+    // if(delflag){
+    //      ticket.remove();
+    // }
  }
 
- function handle_lock(ticket){
+ function handle_lock(ticket,id){
     let ticLockElem = ticket.querySelector(".ticket_lock");
     let lock = ticLockElem.children[0];
     let ticTaskArea = ticket.querySelector(".ticket_task");
     lock.addEventListener("click",(e)=>{
+        let ticketIdx = getTicketIdx(id)
         if(lock.classList.contains(lockclass)){
             lock.classList.remove(lockclass);
             lock.classList.add(unlockclass);
@@ -134,21 +154,39 @@ function handle_Remove(ticket){
             lock.classList.add(lockclass);
             ticTaskArea.setAttribute("contenteditable","false")
         }
+
+        // local storage update
+        ticket_arr[ticketIdx].t_data = ticTaskArea.innerText;   //doubt
+        localStorage.setItem("jira_tickets",JSON.stringify(ticket_arr));
     })
 }
 
 
-function handle_color(ticket){
+function getTicketIdx(id){
+    let ticketIdx = ticket_arr.findIndex((ticketObj)=>{
+        return ticketObj.t_id===id;  //doubt
+    })
+    return ticketIdx;
+}
+
+function handle_color(ticket,id){
+
     let ticColor = ticket.querySelector(".ticket_color");
         ticColor.addEventListener("click",(e)=>{
+            let ticketIdx = getTicketIdx(id);
             let curr_color = ticColor.classList[1];
-        let curr_index = colors.findIndex((color)=>{
+            let curr_index = colors.findIndex((color)=>{
             return curr_color===color;
         })
         let new_index = (curr_index+1)%4;
         let new_color = colors[new_index];
         ticColor.classList.remove(curr_color);
         ticColor.classList.add(new_color);
+
+        // change data in local storage
+        ticket_arr[ticketIdx].t_color = new_color;  //doubt
+        // localStorage.setItem("jira_tickets",JSON.stringify(ticket_arr));
+        localStorage.setItem("jira_tickets",JSON.stringify(ticket_arr))
     })
     
 }
@@ -156,7 +194,7 @@ function handle_color(ticket){
 function setModalToDefault(){
     modal_cont.style.display = "none";
     text_area.value = "";
-    modal_priority = colors[colors.length-1];
+    modal_priority = colors[colors.length-1]; 
     allPriorityColors.forEach((elem2,idx)=>{
         elem2.classList.remove("border");
     })
